@@ -2,7 +2,7 @@ package com.gmail.shelkovich.anton.service.model.dto;
 
 import com.gmail.shelkovich.anton.repository.model.Role;
 import org.hibernate.validator.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,13 +13,13 @@ public class UserDTO {
     private Long id;
 
     @NotEmpty(message = "{reg.user.emptyRequiredField}")
+    @Size(max=25, message = "{eg.user.tooLongUsername}")
     private String username;
 
-    @NotNull
     @Size(min=6, max=25, message = "{reg.user.passwordNotInRange}")
     private String password;
 
-    @NotNull
+    @NotEmpty(message = "{reg.user.emptyRequiredField}")
     private String confirmPassword;
 
     private Role role;

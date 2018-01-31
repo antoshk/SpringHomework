@@ -37,6 +37,9 @@
         <security:authorize access="hasRole('USER')">
                 <li><a href="${pageContext.request.contextPath}/user/docs">Docs</a></li>
         </security:authorize>
+        <security:authorize access="hasRole('ADMIN')">
+                        <li><a href="${pageContext.request.contextPath}/admin/users">Users</a></li>
+        </security:authorize>
 
         <security:authorize access="isAuthenticated()">
                 <li><a href="${pageContext.request.contextPath}/logout">Выйти</a></li>

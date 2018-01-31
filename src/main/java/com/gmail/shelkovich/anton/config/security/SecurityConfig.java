@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .usernameParameter("username")
                     .successHandler((req, resp, auth) -> {
                         if (auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
-                            resp.sendRedirect(req.getContextPath()+"/admin");
+                            resp.sendRedirect(req.getContextPath()+"/admin/users");
                         } else if (auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER"))) {
                             resp.sendRedirect(req.getContextPath()+"/user/docs");
                         } else {

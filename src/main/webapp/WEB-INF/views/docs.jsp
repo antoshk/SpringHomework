@@ -6,17 +6,16 @@
 <table class="table">
     <thead>
         <tr>
-            <th>#</th>
+            <th>id</th>
             <th>title</th>
             <th>body</th>
             <th>Buttons</th>
         </tr>
     </thead>
     <tbody>
-        <c:set var="iter" value="1"/>
         <c:forEach var="doc" items="${docs}">
             <tr>
-                <th scope="row">${iter}</th>
+                <th scope="row">${doc.getId()}</th>
                 <td>${doc.getTitle()}</td>
                 <td>${doc.getBody()}</td>
                 <td>
@@ -24,7 +23,6 @@
                     <a href="${pageContext.request.contextPath}/user/docs/${doc.getId()}/edit" class="btn btn-default" type="button">Edit</a>
                 </td>
             </tr>
-            <c:set var="iter" value="${iter+1}"/>
         </c:forEach>
     </tbody>
 </table>

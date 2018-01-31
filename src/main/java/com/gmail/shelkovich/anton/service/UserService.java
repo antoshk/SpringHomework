@@ -12,6 +12,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -21,13 +24,25 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public UserDTO getByUsername(String username){
-        return UserConverter.toDTO(userDao.getByUsername(username));
+        User user = userDao.getByUsername(username);
+        if (user != null) return UserConverter.toDTO(userDao.getByUsername(username));
+        else return null;
     }
 
     @Transactional(readOnly = true)
     public UserDTO getCurrentUser(){
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return getByUsername(userDetails.getUsername());
+    }
+
+    @Transactional(readOnly = true)
+    public List<UserDTO> getAll(){
+        List<User> users = userDao.getAll();
+        List<UserDTO> userDTOs = new ArrayList<>();
+        for(User user: users){
+            userDTOs.add(UserConverter.toDTO(user));
+        }
+        return userDTOs;
     }
 
     @Transactional(readOnly = true)
@@ -41,6 +56,16 @@ public class UserService {
     @Transactional
     public void updateUser(User user){
         userDao.update(user);
+    }
+
+    @Transactional
+    public void addUser(UserDTO user){
+        userDao.add(UserConverter.fromDTO(user));
+    }
+
+    @Transactional
+    public void deleteUser(Long userId){
+        userDao.delete(userId);
     }
 
 
