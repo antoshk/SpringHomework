@@ -35,9 +35,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .usernameParameter("username")
                     .successHandler((req, resp, auth) -> {
                         if (auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
-                            resp.sendRedirect("/admin");
+                            resp.sendRedirect(req.getContextPath()+"/admin");
                         } else if (auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER"))) {
-                            resp.sendRedirect("/user");
+                            resp.sendRedirect(req.getContextPath()+"/user/docs");
                         } else {
                             throw new ExceptionInInitializerError("role not found");
                         }

@@ -11,7 +11,7 @@
     <title>Spring test</title>
 
     <!-- Bootstrap -->
-    <link href="resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 
   </head>
 <body>
@@ -33,6 +33,10 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
+
+        <security:authorize access="hasRole('USER')">
+                <li><a href="${pageContext.request.contextPath}/user/docs">Docs</a></li>
+        </security:authorize>
 
         <security:authorize access="isAuthenticated()">
                 <li><a href="${pageContext.request.contextPath}/logout">Выйти</a></li>

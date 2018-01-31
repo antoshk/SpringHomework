@@ -12,6 +12,8 @@ public class Document implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "f_id")
     private Long id;
+    @Column(name = "f_title")
+    private String title;
     @Column(name = "f_body")
     private String body;
 
@@ -29,5 +31,13 @@ public class Document implements Serializable {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
